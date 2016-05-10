@@ -16,7 +16,9 @@ RUN cd / && ./atlassian-jira-software-7.1.4-jira-7.1.4-x64.bin < ./installjira
 RUN rm /atlassian-jira-software-7.1.4-jira-7.1.4-x64.bin
 
 RUN mkdir /home/jira-app-backup/ && cp -r /var/atlassian/jira-app/* /home/jira-app-backup/
-RUN mkdir /home/jira-home-backup/ && cp -r /var/atlassian/jira-home/* /home/jira-home-backup/
+RUN mkdir /home/jira-home-backup/ 
+RUN echo a > /var/atlassian/jira-home/homedirfile
+RUN cp -r /var/atlassian/jira-home/* /home/jira-home-backup/
 
 VOLUME /var/lib/postgresql/9.4/main /var/atlassian/jira-app /var/atlassian/jira-home /var/hostdir
 
