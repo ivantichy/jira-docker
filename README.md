@@ -29,11 +29,9 @@ I personally start the container using this command: `docker run -it -p 8080:808
 ## How to set it up
 
 1. Create these folders:
-
-* `mkdir -p /var/docker-data/postgres`
-* `mkdir -p /var/docker-data/jira-app`
-* `mkdir -p /var/docker-data/jira-home`
-
+ * `mkdir -p /var/docker-data/postgres`
+ * `mkdir -p /var/docker-data/jira-app`
+ * `mkdir -p /var/docker-data/jira-home`
 2. Migrate your data if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything.
 
 3. Create a start script executing: `echo "docker run -it -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira \"$@\"" > ~/runjira.sh && chmod +x ~/runjira.sh`
