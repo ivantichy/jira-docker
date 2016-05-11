@@ -36,7 +36,7 @@ I personally start the container using this command: `docker run -it -p 8080:808
 
 3. Create a start script executing: `echo "docker run -it -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira \"$@\"" > ~/runjira.sh && chmod +x ~/runjira.sh`
 
-4. Run JIRA using this command `~/runjira.sh`. Container will set permitions on folders in step 1 (postgresql:1100, jira:1200) so count with that. This is needed because jira and db is not running as root.
+4. Run JIRA using this command `~/runjira.sh`. Container will set permitions on folders from step 1 (postgresql:1100, jira:1200) so count with that. This is needed because JIRA and database is not running as root. You can stop container anytime using `docker stop <container_name>` command. This will gracefully stop JIRA and PostgreSQL service inside the containter, container will stop after that.
 
 5. Set up JIRA (see description in the begining of this file), you can use trial licence to start working with JIRA.
 
