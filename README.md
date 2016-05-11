@@ -30,9 +30,9 @@ I personally start the container using this command: `docker run -it -p 8080:808
 
 1. Create these folders:
 
-* `mkdir -p /var/docker-data/postgres` 
-* `mkdir -p /var/docker-data/jira-app` 
-* `mkdir -p /var/docker-data/jira-home` 
+* `mkdir -p /var/docker-data/postgres`
+* `mkdir -p /var/docker-data/jira-app`
+* `mkdir -p /var/docker-data/jira-home`
 
 2. Migrate your data if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything.
 
@@ -49,6 +49,6 @@ When you backup:
 * `/var/docker-data/jira-app`
 * `/var/docker-data/jira-home`
  
-then you are safe. You should set up database backups inside JIRA application. Your backups will be automatically saved into your JIRA home directory as zip files and you can restore JIRA database later.
+Then you are safe. You should set up database backups inside JIRA application. Your backups will be automatically saved into your JIRA home directory as zip files and you can use them to restore JIRA database later.
 
 - TBD
