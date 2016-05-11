@@ -26,16 +26,23 @@ When you run conainer using command like mentione above `docker run -it -p 8080:
 
 I personally start the container using this command: `docker run -it -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira "$@"`. This causes that docker daemon uses paths I selected (/var/docker-data/). I usually backup these folders and I use them to migrate jira from one location to another. These folders survive container deletion which is important. 
 
-Create 
+## How to set it up
+
+1. Create these folders:
 
 * `mkdir -p /var/docker-data/postgres`
 * `mkdir -p /var/docker-data/jira-app`
 * `mkdir -p /var/docker-data/jira-home`
 
+2. Migrate your data if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything.
 
+3. Create a start script executing: `echo "docker run -it -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira \"$@\"" > ~/runjira.sh && chmod +x ~/runjira.sh`
 
+4. Run JIRA using this command `~/runjira.sh`. Container will set permitions on folders in step 1 (postgresql:1100, jira:1200) so count with that. This is needed because jira and db is not running as root.
 
-When you backup:
+5. Set up JIRA (see description in the begining of this file)
+
+Note - when you backup:
 
 * `/var/docker-data/postgres`
 * `/var/docker-data/jira-app`
