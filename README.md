@@ -30,9 +30,9 @@ I personally start the container using this command: `docker run -it -p 8080:808
 
 1. Create these folders:
 
-* `mkdir -p /var/docker-data/postgres`
-* `mkdir -p /var/docker-data/jira-app`
-* `mkdir -p /var/docker-data/jira-home`
+* `mkdir -p /var/docker-data/postgres` 
+* `mkdir -p /var/docker-data/jira-app` 
+* `mkdir -p /var/docker-data/jira-home` 
 
 2. Migrate your data if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything.
 
@@ -40,16 +40,15 @@ I personally start the container using this command: `docker run -it -p 8080:808
 
 4. Run JIRA using this command `~/runjira.sh`. Container will set permitions on folders in step 1 (postgresql:1100, jira:1200) so count with that. This is needed because jira and db is not running as root.
 
-5. Set up JIRA (see description in the begining of this file)
+5. Set up JIRA (see description in the begining of this file), you can use trial licence to start working with JIRA.
 
-Note - when you backup:
+## Backup
+When you backup:
 
 * `/var/docker-data/postgres`
 * `/var/docker-data/jira-app`
 * `/var/docker-data/jira-home`
  
-then you are safe.
-
-
+then you are safe. You should set up database backups inside JIRA application. Your backups will be automatically saved into your JIRA home directory as zip files and you can restore JIRA database later.
 
 - TBD
