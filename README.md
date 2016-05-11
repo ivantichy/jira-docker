@@ -20,5 +20,29 @@ I removed HTTPS support from JIRA container as this should be managed by separat
 
 # Volumes, data storage, data backup and restore, migration of jira instances
 
-- VOLUME /var/lib/postgresql/9.4/main /var/atlassian/jira-app /var/atlassian/jira-home /var/hostdir
+When you run conainer using command like mentione above `docker run -it -p 8080:8080  ivantichy/jira` your database data, JIRA home directory containing attachments, backups etc, JIRA application directory are stored using volumes on host machine (not inside containcer). You can find information about physical location using `docker inspect <container_name>`. To get your container name use `docker ps`. To find volumes location look for "mount" section in the printed output.
+
+## To use your own path for app data
+
+I personally start the container using this command: `docker run -it -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira "$@"`. This causes that docker daemon uses paths I selected (/var/docker-data/). I usually backup these folders and I use them to migrate jira from one location to another. These folders survive container deletion which is important. 
+
+Create 
+
+* `mkdir -p /var/docker-data/postgres`
+* `mkdir -p /var/docker-data/jira-app`
+* `mkdir -p /var/docker-data/jira-home`
+
+
+
+
+When you backup:
+
+* `/var/docker-data/postgres`
+* `/var/docker-data/jira-app`
+* `/var/docker-data/jira-home`
+ 
+then you are safe.
+
+
+
 - TBD
