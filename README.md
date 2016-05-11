@@ -18,9 +18,9 @@ PostgreSQL is not listening to communication from outside so it is not such a bi
 
 I removed HTTPS support from JIRA container as this should be managed by separate container doing proxy/loadbalancing.
 
-# Volumes, data storage, data backup and restore, migration of jira instances
+# Volumes, data storage, data backup and restore, migration of JIRA instances
 
-When you run conainer using command like mentione above `docker run -it -p 8080:8080  ivantichy/jira` your database data, JIRA home directory containing attachments, backups etc, JIRA application directory are stored using volumes on host machine (not inside containcer). You can find information about physical location using `docker inspect <container_name>`. To get your container name use `docker ps`. To find volumes location look for "mount" section in the printed output.
+When you run containerr using command like mentione above `docker run -it -p 8080:8080  ivantichy/jira` your database data, JIRA home directory containing attachments, backups etc, JIRA application directory are stored using volumes on host machine (not inside containcer). You can find information about physical location using `docker inspect <container_name>`. To get your container name use `docker ps`. To find volumes location look for "mount" section in the printed output.
 
 ## To use your own path for app data
 
@@ -50,6 +50,7 @@ When you backup:
 Then you are safe. You should set up database backups inside JIRA application. Your backups will be automatically saved into your JIRA home directory as zip files and you can use them to restore JIRA database later.
 
 - TBD
+- migration, restore
 
 
 Note: Inside the container JAVA is running with -Djava.net.preferIPv4Stack=true directive to force Tomcat to listen on IPv4.
