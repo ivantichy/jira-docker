@@ -65,4 +65,7 @@ if [ "$1" != "install" ]; then
   do
           sleep 1
   done
+
+else
+  echo "Installation done."
 fi
