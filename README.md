@@ -11,9 +11,9 @@ There are two ways you can use this image:
 
 **You can get clean JIRA installation this way:**
 
-`docker run -it --name jira -p 8080:8080  ivantichy/jira` as interactive shell
+`docker run -it --name jira -p 8080:8080  ivantichy/jira:7.1.4` as interactive shell
 -or-
-`docker run -d --name jira -p 8080:8080  ivantichy/jira` as daemon (not blocking shell - check status using `docker ps`)
+`docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4` as daemon (not blocking shell - check status using `docker ps`)
 
 **The result is running JIRA listening on port 8080.**
 
@@ -23,7 +23,7 @@ As a part of the installation there is PostgreSQL database. First time you run J
 2. You want to use your own database.
 3. Database type is PostgreSQL, hostname is localhost, port is default, database is jiradb, user is jiradb, password is jiradb, Schema is public.
 
-To stop it run `docker stop jira`. To run it again use `docker start jira`. To clean all your settings (to have pure new jira installation) run `docker rm jira` to run new container use "run" command above e.g. `docker run -d --name jira -p 8080:8080  ivantichy/jira`.
+To stop it run `docker stop jira`. To run it again use `docker start jira`. To clean all your settings (to have pure new jira installation) run `docker rm jira` to run new container use "run" command above e.g. `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4`.
 
 Enjoy!
 
@@ -33,11 +33,11 @@ Known DB username and password: PostgreSQL is not listening to communication com
 
 ## Volumes, data storage, data backup and restore, migration of JIRA instances
 
-When you run container using command like mentioned above `docker run -d --name jira -p 8080:8080  ivantichy/jira` your database data, JIRA home directory containing attachments, backups etc, JIRA application directory are stored using volumes on host machine (not inside the containcer). You can find information about physical location using `docker inspect jira`. To find volumes location look for "mount" section in the printed output.
+When you run container using command like mentioned above `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4` your database data, JIRA home directory containing attachments, backups etc, JIRA application directory are stored using volumes on host machine (not inside the containcer). You can find information about physical location using `docker inspect jira`. To find volumes location look for "mount" section in the printed output.
 
 ## To use your own path for app data
 
-I personally start the container using this command: `docker run --rm --name jira -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira "$@" &`. This causes that docker daemon uses paths I selected (/var/docker-data/). I usually backup these folders and I use them to migrate jira from one location to another. These folders survive container deletion which is important. 
+I personally start the container using this command: `docker run --rm --name jira -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.4 "$@" &`. This causes that docker daemon uses paths I selected (/var/docker-data/). I usually backup these folders and I use them to migrate jira from one location to another. These folders survive container deletion which is important. 
 
 ## How to set it up
 
@@ -46,7 +46,7 @@ I personally start the container using this command: `docker run --rm --name jir
  * `mkdir -p /var/docker-data/jira-app`
  * `mkdir -p /var/docker-data/jira-home`
 
-2. Create a start script executing: `echo "docker run --rm -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira \"$@\" &" > ~/runjira.sh && chmod +x ~/runjira.sh`
+2. Create a start script executing: `echo "docker run --rm -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.4 \"$@\" &" > ~/runjira.sh && chmod +x ~/runjira.sh`
 
 3. Install JIRA (will not start JIRA)  executing `~/runjira.sh install`
 
