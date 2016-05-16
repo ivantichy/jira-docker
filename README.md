@@ -6,7 +6,6 @@ There are two ways you can use this image:
 
 * Scenario A - simple instalation, no data import, trial or purchased licence of JIRA
 * Scenario B - advanced,  migration from previous instalation (older version), more setup, backup
-* 
 
 # Scenario A - Simple instalation
 
@@ -77,4 +76,3 @@ It should work!
 ## Notes
 * Inside the container JAVA is running with -Djava.net.preferIPv4Stack=true directive to force Tomcat to listen on IPv4.
 * I removed HTTPS support from JIRA container as this should be managed by separate container doing proxy/loadbalancing.
-* 
