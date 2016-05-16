@@ -37,7 +37,7 @@ When you run container using command like mentioned above `docker run -d --name 
 
 ## To use your own path for app data
 
-I personally start the container using this command: `docker run --rm --name jira -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.4 "$@" &`. This causes that docker daemon uses paths I selected (/var/docker-data/). I usually backup these folders and I use them to migrate jira from one location to another. These folders survive container deletion which is important. 
+I personally start the container using this command: `docker run --rm --name jira -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.4 &`. This causes that docker daemon uses paths I selected (/var/docker-data/). I usually backup these folders and I use them to migrate jira from one location to another. These folders survive container deletion which is important. 
 
 ## How to set it up
 
@@ -46,7 +46,7 @@ I personally start the container using this command: `docker run --rm --name jir
  * `mkdir -p /var/docker-data/jira-app`
  * `mkdir -p /var/docker-data/jira-home`
 
-2. Create a start script executing: `echo "docker run --rm -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.4 \"$@\" &" > ~/runjira.sh && chmod +x ~/runjira.sh`
+2. Create a start script executing: `echo "docker run --rm -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.4 \"\$@\" &" > ~/runjira.sh && chmod +x ~/runjira.sh`
 
 3. Install JIRA (will not start JIRA)  executing `~/runjira.sh install`
 
