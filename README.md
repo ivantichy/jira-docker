@@ -66,7 +66,7 @@ When you backup on docker host machine:
  
 Then you are safe. You should set up database backups inside JIRA application. Your backups will be automatically saved into your JIRA home directory as zip files and you can use them to restore JIRA database later.
 
-## Data migration from old JIRA instance to a new one.
+## Data migration from old JIRA instance to a new one
 
 a) In old running JIRA instatnce perform a database backup, follow steps in JIRA Administration / System / System backup. JIRA typicaly stores database backups in JIRA home directory under export directory. For further import, copy your export file (zip) into /import directory located in JIRA home directory. You can check your folder settings in JIRA Administration / System / Sytem info / File paths.
 
