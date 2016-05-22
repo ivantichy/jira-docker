@@ -19,7 +19,7 @@ There are two ways you can use this image:
 
 **The result is running JIRA listening on port 8080.**
 
-As a part of the installation there is PostgreSQL database. First time you run JIRA go to http://yourmachine:8080 and set up JIRA. It will give you a few questions.
+As a part of the installation there is PostgreSQL database. First time you run JIRA go to `http://yourmachine:8080` and set up JIRA. It will give you a few questions.
 
 1. You want to configure JIRA yourself.
 2. You want to use your own database.
