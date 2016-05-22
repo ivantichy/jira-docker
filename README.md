@@ -13,7 +13,7 @@ There are two ways you can use this image:
 
 `docker run -it --name jira -p 8080:8080  ivantichy/jira:7.1.4` as interactive shell
 -or-
-`docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4` as daemon (not blocking shell - check status using `docker ps`)
+`docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4` as daemon
 
 **The result is running JIRA listening on port 8080.**
 
@@ -23,11 +23,11 @@ As a part of the installation there is PostgreSQL database. First time you run J
 2. You want to use your own database.
 3. Database type is PostgreSQL, hostname is localhost, port is default, database is jiradb, user is jiradb, password is jiradb, Schema is public.
 
-To stop it run `docker stop jira`. To run it again use `docker start jira`. To clean all your settings (to have pure new jira installation) run `docker rm jira` to run new container use "run" command above e.g. `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4`.
+To stop it run `docker stop jira`. To run it again use `docker start jira`. To clean all your settings (to uninstall JIRA) run `docker rm jira` to run new container use "run" command above e.g. `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4`.
 
 Enjoy!
 
-Known DB username and password: PostgreSQL is not listening to communication comming from outside so it is not such a big issue. You can change jiradb user password in PostgreSQL (google it :) and then change dbconfig.xml in JIRA applicatiopn directory to reflect this change. To get into the container to change this run `docker exec -it jira bash` and you will get bash inside the running container. Location of JIRA application directory is `/var/atlassian/jira-app` user running database is postgres. 
+Known database username and password: PostgreSQL is not listening to communication comming from outside so it is not such a big issue. You can change jiradb user password in PostgreSQL (google it :) and then change dbconfig.xml in JIRA applicatiopn directory to reflect this change. To get into the container to change this run `docker exec -it jira bash` and you will get bash inside the running container. Location of JIRA application directory is `/var/atlassian/jira-app` and user running database is postgres. 
 
 # Scenario B - advanced installation, migration, backup
 
@@ -50,13 +50,15 @@ I personally start the container using this command: `docker run --rm --name jir
 
 3. Install JIRA (will not start JIRA)  executing `~/runjira.sh install`
 
-4. Migrate your data if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything - when you are creating first JIRA instalation.
+4. Migrate your data if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything e.g. when you are creating first JIRA instalation.
 
-5. Run JIRA using this command: `~/runjira.sh`. Container will set owner on folders from step 1 (postgres 1100:1100, jira-home and jira-app 1200:1200) so count with that. This is needed because JIRA and database is not running as root. You can stop container anytime using `docker stop <container_name>` command. This will gracefully stop JIRA and PostgreSQL service inside the containter, container will stop, exit and delete itself (not data) after that. P.S. to get container name run `docker ps`.
+5. Run JIRA using this command: `~/runjira.sh`. Container will set owner on folders from step 1 (postgres 1100:1100, jira-home and jira-app 1200:1200) so count with that. This is needed because JIRA and database is not running as root. You can stop container anytime using `docker stop <container_name>` command. This will gracefully stop JIRA and PostgreSQL service inside the containter, container will stop, exit and delete itself (not data) after that. To get container name run `docker ps`.
 
 6. Set up running JIRA via browser (see description in the begining of this file), you can use trial licence to start working with JIRA.
 
-7. Set backup
+7. In running JIRA aplication import old database if you are migrating from previous JIRA instalation (use native JIRA import in JIRA administration - https://confluence.atlassian.com/jira062/migrating-jira-to-another-server-588581560.html#MigratingJIRAtoAnotherServer-3.6ImportyouroldJIRAdataintoyournewJIRA). 
+
+8. Set backup
 
 When you backup on docker host machine:
 
@@ -64,7 +66,11 @@ When you backup on docker host machine:
 * `/var/docker-data/jira-app`
 * `/var/docker-data/jira-home`
  
-Then you are safe. You should set up database backups inside JIRA application. Your backups will be automatically saved into your JIRA home directory as zip files and you can use them to restore JIRA database later.
+Then you are safe. You should set up database backups inside JIRA application. Your backups will be automatically saved into your JIRA home directory as zip files and you can use them to restore JIRA database later (https://confluence.atlassian.com/jira/backing-up-data-185729581.html).
+
+## Clean setting
+
+Anytime you can run `~/runjira.sh purge`. This will permanently erase all your data. You can use it to start from scratch (clean JIRA installation and clean database).
 
 ## Data migration from old JIRA instance to a new one
 
@@ -72,18 +78,10 @@ a) In old running JIRA instatnce perform a database backup, follow steps in JIRA
 
 b) Stop old JIRA instance. Back up your JIRA home and JIRA application directory. Copy JIRA home directory to /var/docker-data/jira-home on your docker host machine.
 
-c) Check dbconfig.xml file in JIRA home directory to use right db username and password (we used jiradb/jiradb).
+c) Check dbconfig.xml file in JIRA home directory to use right database username and password (we used jiradb/jiradb).
 
-d) Perform yout extra settings in JIRA app directory (like server.xml) in /var/docker 
-
-d) Start new Jira instance, create new empty database, import old database. 
-
-It should work!
-
-## Clean setting
-
-To start from scratch just run `~/runjira.sh purge`. This will permanently erase all your data.
+d) Perform yout extra settings in JIRA app directory (like editing server.xml) in `/var/docker/`-
 
 ## Notes
-* Inside the container JAVA is running with -Djava.net.preferIPv4Stack=true directive to force Tomcat to listen on IPv4.
+* Inside the container JAVA is running with -Djava.net.preferIPv4Stack=true directive to force Tomcat to listen on IPv4 (without that Tomcat is listening on IPv6 only).
 * I removed HTTPS support from JIRA container as this should be managed by separate container doing proxy/loadbalancing.
