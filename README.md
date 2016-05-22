@@ -35,7 +35,7 @@ Known database username and password: PostgreSQL is not listening to communicati
 
 ## Volumes, data storage, data backup and restore, migration of JIRA instances
 
-When you run container using command like mentioned above `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4` your database data, JIRA home directory containing attachments, backups etc, JIRA application directory are stored using volumes on host machine (not inside the container). You can find information about physical location using `docker inspect jira`. To find volumes location look for "mount" section in the printed output.
+When you run container using command like mentioned above `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4` your database data, JIRA home directory containing attachments, backups etc and JIRA application directory are stored using volumes on host machine (not inside the container). You can find information about physical location using `docker inspect jira`. To find volumes location look for "mount" section in the printed output.
 
 ## To use your own path for app data
 
