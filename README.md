@@ -76,13 +76,13 @@ Anytime you can run `~/runjira.sh purge`. This will permanently erase all your d
 
 ## Data migration from old JIRA instance to a new one
 
-a) In old running JIRA instance perform a database backup, follow steps in JIRA Administration / System / System backup. JIRA typically stores database backups in JIRA home directory under export directory. For further import, copy your export file (zip) into /import directory located in JIRA home directory. You can check your folder settings in JIRA Administration / System / System info / File paths.
+1. In old running JIRA instance perform a database backup, follow steps in JIRA Administration / System / System backup. JIRA typically stores database backups in JIRA home directory under export directory. For further import, copy your export file (zip) into /import directory located in JIRA home directory. You can check your folder settings in JIRA Administration / System / System info / File paths.
 
-b) Stop old JIRA instance. Back up your JIRA home and JIRA application directory. Copy JIRA home directory to /var/docker-data/jira-home on your docker host machine.
+2. Stop old JIRA instance. Back up your JIRA home and JIRA application directory. Copy JIRA home directory to /var/docker-data/jira-home on your docker host machine.
 
-c) Check dbconfig.xml file in JIRA home directory to use right database username and password (we used jiradb/jiradb).
+3. Check dbconfig.xml file in JIRA home directory to use right database username and password (we used jiradb/jiradb).
 
-d) Perform your extra settings in JIRA app directory (like editing server.xml) in `/var/docker/`-
+4. Perform your extra settings in JIRA app directory (like editing server.xml) in `/var/docker/`-
 
 ## Notes
 * Inside the container JAVA is running with -Djava.net.preferIPv4Stack=true directive to force Tomcat to listen on IPv4 (without that Tomcat is listening on IPv6 only).
