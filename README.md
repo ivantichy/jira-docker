@@ -1,13 +1,13 @@
 # JIRA in Docker container
 
-Welcome to JIRA docker image. What is this? This is simply something that have been missing over the whole Internet. Some fully automated one click JIRA installation. I tried to use Puppet, but official JIRA Puppet Forge stuff was obsolete.
+Welcome to JIRA Docker image. What is this? This is simply something that have been missing over the whole Internet. Some fully automated one click JIRA installation. I tried to use Puppet, but official JIRA Puppet Forge stuff was obsolete.
 
 There are two ways you can use this image:
 
-* Scenario A - simple instalation, no data import, trial or purchased licence of JIRA
-* Scenario B - advanced,  migration from previous instalation (older version), more setup, backup
+* Scenario A - simple installation, no data import, trial or purchased license of JIRA
+* Scenario B - advanced,  migration from previous installation (older version), more setup, backup
 
-# Scenario A - Simple instalation
+# Scenario A - Simple installation
 
 **You can get clean JIRA installation this way:**
 
@@ -27,7 +27,7 @@ To stop it run `docker stop jira`. To run it again use `docker start jira`. To c
 
 Enjoy!
 
-Known database username and password: PostgreSQL is not listening to communication comming from outside so it is not such a big issue. You can change jiradb user password in PostgreSQL (google it :) and then change dbconfig.xml in JIRA applicatiopn directory to reflect this change. To get into the container to change this run `docker exec -it jira bash` and you will get bash inside the running container. Location of JIRA application directory is `/var/atlassian/jira-app` and user running database is postgres. 
+Known database username and password: PostgreSQL is not listening to communication coming from outside so it is not such a big issue. You can change jiradb user password in PostgreSQL (google it :) and then change dbconfig.xml in JIRA application directory to reflect this change. To get into the container to change this run `docker exec -it jira bash` and you will get bash inside the running container. Location of JIRA application directory is `/var/atlassian/jira-app` and user running database is postgres. 
 
 # Scenario B - advanced installation, migration, backup
 
@@ -37,7 +37,7 @@ When you run container using command like mentioned above `docker run -d --name 
 
 ## To use your own path for app data
 
-I personally start the container using this command: `docker run --rm --name jira -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.4 &`. This causes that docker daemon uses paths I selected (/var/docker-data/). I usually backup these folders and I use them to migrate jira from one location to another. These folders survive container deletion which is important. 
+I personally start the container using this command: `docker run --rm --name jira -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.4 &`. This causes that docker daemon uses paths I selected (/var/docker-data/). I usually backup these folders and I use them to migrate JIRA from one location to another. These folders survive container deletion which is important. 
 
 ## How to set it up
 
@@ -50,17 +50,17 @@ I personally start the container using this command: `docker run --rm --name jir
 
 3. Install JIRA (will not start JIRA)  executing `~/runjira.sh install`
 
-4. Migrate your data if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything e.g. when you are creating first JIRA instalation.
+4. Migrate your data if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything e.g. when you are creating first JIRA installation.
 
-5. Run JIRA using this command: `~/runjira.sh`. Container will set owner on folders from step 1 (postgres 1100:1100, jira-home and jira-app 1200:1200) so count with that. This is needed because JIRA and database is not running as root. You can stop container anytime using `docker stop <container_name>` command. This will gracefully stop JIRA and PostgreSQL service inside the containter, container will stop, exit and delete itself (not data) after that. To get container name run `docker ps`.
+5. Run JIRA using this command: `~/runjira.sh`. Container will set owner on folders from step 1 (postgres 1100:1100, jira-home and jira-app 1200:1200) so count with that. This is needed because JIRA and database is not running as root. You can stop container anytime using `docker stop <container_name>` command. This will gracefully stop JIRA and PostgreSQL service inside the container, container will stop, exit and delete itself (not data) after that. To get container name run `docker ps`.
 
-6. Set up running JIRA via browser (see description in the begining of this file), you can use trial licence to start working with JIRA.
+6. Set up running JIRA via browser (see description in the begining of this file), you can use trial license to start working with JIRA.
 
-7. In running JIRA aplication import old database if you are migrating from previous JIRA instalation (use native JIRA import in JIRA administration - https://confluence.atlassian.com/jira062/migrating-jira-to-another-server-588581560.html#MigratingJIRAtoAnotherServer-3.6ImportyouroldJIRAdataintoyournewJIRA). 
+7. In running JIRA application import old database if you are migrating from previous JIRA installation (use native JIRA import in JIRA administration - https://confluence.atlassian.com/jira062/migrating-jira-to-another-server-588581560.html#MigratingJIRAtoAnotherServer-3.6ImportyouroldJIRAdataintoyournewJIRA). 
 
 8. Set backup
 
-When you backup on docker host machine:
+When you backup this on Docker host machine:
 
 * `/var/docker-data/postgres`
 * `/var/docker-data/jira-app`
