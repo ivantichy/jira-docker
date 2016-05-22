@@ -3,12 +3,16 @@ FROM debian:jessie
 RUN useradd -u 1100 postgres && useradd -u 1099 dummyuser
 
 RUN apt-get -y update && \
-apt-get -y install wget nano git postgresql
+apt-get -y install wget nano git postgresql && rm -rf /var/lib/apt/lists/*
 
 # backups
 RUN  mkdir /home/dbbackup && cp -r /var/lib/postgresql/9.4/main/* /home/dbbackup/
 
 RUN cd / && wget https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-software-7.1.4-jira-7.1.4-x64.bin
+
+COPY check.gpr /check.gpr
+RUN sha256sum -c check.gpr
+
 RUN chmod a+x atlassian-jira-software-7.1.4-jira-7.1.4-x64.bin
 
 COPY ./installjira /installjira

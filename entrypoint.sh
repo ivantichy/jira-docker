@@ -51,17 +51,21 @@ chown -R jira:jira /var/atlassian/jira-home
 chown -R postgres:postgres /var/lib/postgresql/9.4/main
 chmod -R 0700 /var/lib/postgresql/9.4/main
 
-service postgresql start
+if [ "$1" != "install" ]; then
+  service postgresql start
 
-export JAVA_OPTS=-Djava.net.preferIPv4Stack=true
-cd /var/atlassian/jira-app/bin
-./start-jira.sh
+  export JAVA_OPTS=-Djava.net.preferIPv4Stack=true
+  cd /var/atlassian/jira-app/bin
+  ./start-jira.sh
 
 
-trap "/var/atlassian/jira-app/bin/stop-jira.sh; service postgresql stop; echo \"Correctly stopped.\"; exit 0" SIGINT SIGTERM
+  trap "/var/atlassian/jira-app/bin/stop-jira.sh; service postgresql stop; echo \"Correctly stopped.\"; exit 0" SIGINT SIGTERM
 
-while :
-do
-        sleep 1
-done
+  while :
+  do
+          sleep 1
+  done
 
+else
+  echo "Installation done."
+fi
