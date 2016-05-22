@@ -12,7 +12,9 @@ There are two ways you can use this image:
 **You can get clean JIRA installation this way:**
 
 `docker run -it --name jira -p 8080:8080  ivantichy/jira:7.1.4` as interactive shell
+
 -or-
+
 `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4` as daemon
 
 **The result is running JIRA listening on port 8080.**
