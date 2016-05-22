@@ -52,13 +52,13 @@ I personally start the container using this command: `docker run --rm --name jir
 
 3. Install JIRA (will not start JIRA)  executing `~/runjira.sh install`. Installation is running in background. Please check state using `docker ps` to see when it is finished (container exits).
 
-4. Migrate your data if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything e.g. when you are creating first JIRA installation.
+4. Migrate your attachmens and settings if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything e.g. when you are creating first JIRA installation.
 
 5. Run JIRA using this command: `~/runjira.sh`. Container will set owner on folders from step 1 (postgres 1100:1100, jira-home and jira-app 1200:1200) so count with that. This is needed because JIRA and database is not running as root. You can stop container anytime using `docker stop <container_name>` command. This will gracefully stop JIRA and PostgreSQL service inside the container, container will stop, exit and delete itself (not data) after that. To get container name run `docker ps`.
 
 6. Set up running JIRA via browser (see description in the beginning of this file), you can use trial license to start working with JIRA.
 
-7. In running JIRA application import old database if you are migrating from previous JIRA installation (use native JIRA import in JIRA administration - https://confluence.atlassian.com/jira062/migrating-jira-to-another-server-588581560.html#MigratingJIRAtoAnotherServer-3.6ImportyouroldJIRAdataintoyournewJIRA). 
+7. In running JIRA application import old database you saved in Step 4 (if you are migrating from previous JIRA installatio). Use native JIRA import in JIRA administration - https://confluence.atlassian.com/jira062/migrating-jira-to-another-server-588581560.html#MigratingJIRAtoAnotherServer-3.6ImportyouroldJIRAdataintoyournewJIRA). 
 
 8. Set backup
 
@@ -70,7 +70,7 @@ When you backup this on Docker host machine:
  
 Then you are safe. You should set up database backups inside JIRA application. Your backups will be automatically saved into your JIRA home directory as zip files and you can use them to restore JIRA database later (https://confluence.atlassian.com/jira/backing-up-data-185729581.html).
 
-## Clean setting
+## Clean settings
 
 Anytime you can run `~/runjira.sh purge`. This will permanently erase all your data. You can use it to start from scratch (clean JIRA installation and clean database).
 
