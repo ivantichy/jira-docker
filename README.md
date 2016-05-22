@@ -48,7 +48,7 @@ I personally start the container using this command: `docker run --rm --name jir
  * `mkdir -p /var/docker-data/jira-app`
  * `mkdir -p /var/docker-data/jira-home`
 
-2. Create a start script executing: `echo "docker run --rm -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.4 \"\$@\" &" > ~/runjira.sh && chmod +x ~/runjira.sh`
+2. Download start script executing: `wget https://raw.githubusercontent.com/ivantichy/jira-docker/7.1.4/runjira.sh -O ~/runjira.sh && chmod +x ~/runjira.sh`
 
 3. Install JIRA (will not start JIRA)  executing `~/runjira.sh install`. Installation is running in background. Please check state using `docker ps` to see when it is finished (container exits).
 
