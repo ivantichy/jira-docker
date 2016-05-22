@@ -72,7 +72,7 @@ Then you are safe. You should set up database backups inside JIRA application. Y
 
 ## Clean settings
 
-Anytime you can run `~/runjira.sh purge`. This will permanently erase all your data. You can use it to start from scratch (clean JIRA installation and clean database).
+Anytime you can run `docker stop <container_name>` (if running) and `~/runjira.sh purge`. This will permanently erase all your data. You can use it to start from scratch (clean JIRA installation and clean database).
 
 ## Data migration from old JIRA instance to a new one
 
