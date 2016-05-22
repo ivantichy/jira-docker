@@ -23,7 +23,7 @@ As a part of the installation there is PostgreSQL database. First time you run J
 
 1. You want to configure JIRA yourself.
 2. You want to use your own database.
-3. Database type is PostgreSQL, hostname is localhost, port is default, database is jiradb, user is jiradb, password is jiradb, Schema is public.
+3. Database type is PostgreSQL, hostname is localhost, port is default, database is jiradb, user is jiradb, password is jiradb, schema is public.
 
 To stop it run `docker stop jira`. To run it again use `docker start jira`. To clean all your settings (to uninstall JIRA) run `docker rm jira` to run new container use "run" command above e.g. `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.4`.
 
