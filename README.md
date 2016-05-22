@@ -58,7 +58,7 @@ I personally start the container using this command: `docker run --rm --name jir
 
 6. Set up running JIRA via browser (see description in the beginning of this file), you can use trial license to start working with JIRA.
 
-7. In running JIRA application import old database you saved in Step 4 (if you are migrating from previous JIRA installatio). Use native JIRA import in JIRA administration - https://confluence.atlassian.com/jira062/migrating-jira-to-another-server-588581560.html#MigratingJIRAtoAnotherServer-3.6ImportyouroldJIRAdataintoyournewJIRA). 
+7. In running JIRA application import old database you saved in Step 4 (if you are migrating from previous JIRA installation). Use native JIRA import in JIRA administration - https://confluence.atlassian.com/jira062/migrating-jira-to-another-server-588581560.html#MigratingJIRAtoAnotherServer-3.6ImportyouroldJIRAdataintoyournewJIRA). 
 
 8. Set backup
 
