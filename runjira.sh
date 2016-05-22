@@ -2,7 +2,7 @@
 # author Ivan Tichy
 
 if [ -f ~/jiracid ]; then
-  if [ `docker ps -q --no-trunc | grep -c `cat ~/jiracid`` == 1 ]; then
+  if [ `docker ps -q --no-trunc | grep -c \`cat ~/jiracid\`` == 1 ]; then
     docker stop `cat ~/jiracid`
   fi
 rm ~/jiracid
