@@ -54,7 +54,7 @@ I personally start the container using this command: `docker run --rm --name jir
 
 4. Migrate your attachmens and settings if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything e.g. when you are creating first JIRA installation.
 
-5. Run JIRA using this command: `~/runjira.sh`. Container will set owner on folders from step 1 (postgres 1100:1100, jira-home and jira-app 1200:1200) so count with that. This is needed because JIRA and database is not running as root. You can stop container anytime using `docker stop <container_name>` command. This will gracefully stop JIRA and PostgreSQL service inside the container, container will stop, exit and delete itself (not data) after that. To get container name run `docker ps`.
+5. Run JIRA using this command: `~/runjira.sh`. Container will set owner on folders from step 1 (postgres 1100:1100, jira-home and jira-app 1200:1200) so count with that. This is needed because JIRA and database is not running as root. You can stop container anytime using `~/stopjira.sh` command. This will gracefully stop JIRA and PostgreSQL service inside the container, container will stop, exit and delete itself (not data) after that.
 
 6. Set up running JIRA via browser (see description in the beginning of this file), you can use trial license to start working with JIRA.
 
@@ -72,7 +72,7 @@ Then you are safe. You should set up database backups inside JIRA application. Y
 
 ## Clean settings
 
-Anytime you can run `docker stop <container_name>` (if running) and `~/runjira.sh purge`. This will permanently erase all your data. You can use it to start from scratch (clean JIRA installation and clean database).
+Anytime you can run `~/runjira.sh purge`. This will permanently erase all your data. You can use it to start from scratch (clean JIRA installation and clean database).
 
 ## Data migration from old JIRA instance to a new one
 
