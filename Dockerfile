@@ -19,6 +19,8 @@ COPY ./installjira /installjira
 RUN cd / && ./atlassian-jira-software-7.1.7-jira-7.1.7-x64.bin < ./installjira
 RUN rm /atlassian-jira-software-7.1.7-jira-7.1.7-x64.bin
 
+COPY ./dbconfig.xml /var/atlassian/jira-home/dbconfig.xml
+
 RUN mkdir /home/jira-app-backup/ && cp -r /var/atlassian/jira-app/* /home/jira-app-backup/
 RUN mkdir /home/jira-home-backup/ 
 RUN cp -r /var/atlassian/jira-home/* /home/jira-home-backup/
