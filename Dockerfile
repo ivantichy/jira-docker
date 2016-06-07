@@ -23,7 +23,7 @@ RUN mkdir /home/jira-app-backup/ && cp -r /var/atlassian/jira-app/* /home/jira-a
 RUN mkdir /home/jira-home-backup/ 
 RUN cp -r /var/atlassian/jira-home/* /home/jira-home-backup/
 
-VOLUME /var/lib/postgresql/9.4/main /var/atlassian/jira-app /var/atlassian/jira-home /var/hostdir
+VOLUME /var/lib/postgresql/9.4/main /var/atlassian/jira-app /var/atlassian/jira-home
 
 EXPOSE 8080
 EXPOSE 8443
