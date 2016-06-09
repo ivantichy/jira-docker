@@ -17,7 +17,7 @@ RUN cd / && wget https://downloads.atlassian.com/software/jira/downloads/atlassi
 && cd / && ./atlassian-jira-software-7.1.7-jira-7.1.7-x64.bin < ./installjira \
 && rm /atlassian-jira-software-7.1.7-jira-7.1.7-x64.bin \
 && mkdir /home/jira-app-backup/ && cp -r /var/atlassian/jira-app/* /home/jira-app-backup/ \
-&& /home/jira-home-backup/ && cp -r /var/atlassian/jira-home/* /home/jira-home-backup/
+&& mkdir /home/jira-home-backup/ && cp -r /var/atlassian/jira-home/* /home/jira-home-backup/
 
 VOLUME /var/lib/postgresql/9.4/main /var/atlassian/jira-app /var/atlassian/jira-home /var/hostdir
 
