@@ -32,15 +32,19 @@ fi
 cd /var/lib/postgresql/9.4/main
 if [ `ls | wc -l` -eq 0 ]; then
   cp -r /home/dbbackup/* /var/lib/postgresql/9.4/main/
-  echo "done" > file 
   chown -R postgres:postgres /var/lib/postgresql/9.4/main
   chmod -R 0700 /var/lib/postgresql/9.4/main
+fi
+
+if [ \! -f  /var/lib/postgresql/9.4/main/file ]; then
+  cd /var/lib/postgresql/9.4/main
   service postgresql start
   su - postgres << EOF
     cd /
     psql < createdb.sql
 EOF
   service postgresql stop
+  echo "done" > file 
 fi
 
 fi
