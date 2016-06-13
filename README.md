@@ -11,11 +11,7 @@ There are two ways you can use this image:
 
 **You can get clean JIRA installation this way:**
 
-`docker run -it --name jira -p 8080:8080  ivantichy/jira:7.1.7` as interactive shell
-
--or-
-
-`docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.7` as daemon
+`docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.7`
 
 **The result is running JIRA listening on port 8080.**
 
@@ -31,11 +27,11 @@ JIRA is set to use user jiradb and password jiradb for database connections. As 
 
 ## Volumes, data storage, data backup and restore, migration of JIRA instances
 
-When you run container using command like mentioned above `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.7` your database data, JIRA home directory containing attachments, backups etc and JIRA application directory are stored using volumes on host machine (not inside the container). You can find information about physical location using `docker inspect jira`. To find volumes location look for "mount" section in the printed output.
+When you run container using command like mentioned above (Scenario A) `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.1.7` your database data, JIRA home directory containing attachments, backups etc and JIRA application directory are stored using volumes on host machine (not inside the container). You can find information about physical location using `docker inspect jira`. To find volumes location look for "mount" section in the printed output.
 
 ## To use your own path for app data
 
-I personally start the container using this command: `docker run --rm --name jira -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v  /var/docker-data/jira-app:/var/atlassian/jira-app -v  /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.7 &`. This causes that Docker daemon uses paths I selected (/var/docker-data/). I usually backup these folders and I use them to migrate JIRA from one location to another. These folders survive container deletion which is important. 
+I personally start the container using this command: `docker run --cidfile ~/jiracid --rm -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v /var/docker-data/jira-app:/var/atlassian/jira-app -v /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.1.7 "$@" &`. This causes (`-v` paramater) that Docker daemon uses paths I selected (`/var/docker-data/`). I usually backup these folders and I use them to migrate JIRA from one location to another. These folders survive container deletion which is important.
 
 ## How to set it up
 
@@ -46,17 +42,15 @@ I personally start the container using this command: `docker run --rm --name jir
 
 2. Download start script executing: `wget https://raw.githubusercontent.com/ivantichy/jira-docker/7.1.7/runjira.sh -O ~/runjira.sh && chmod +x ~/runjira.sh`
 
-3. Install JIRA (will not start JIRA)  executing `~/runjira.sh install`. Installation is running in background. Please check state using `docker ps` to see when it is finished (container exits).
+3. Install JIRA (will not start JIRA)  executing `~/runjira.sh install`. Installation is running in background. Please check state using `docker ps` to see when it is finished (container exits). It takes something like a minute or so.
 
 4. Migrate your attachmens and settings if you have some (old JIRA) - see description bellow. Do nothing when you do not need to migrate anything e.g. when you are creating first JIRA installation.
 
 5. Run JIRA using this command: `~/runjira.sh`. Container will set owner on folders from step 1 (postgres 1100:1100, jira-home and jira-app 1200:1200) so count with that. This is needed because JIRA and database is not running as root. You can stop container anytime using `~/stopjira.sh` command. This will gracefully stop JIRA and PostgreSQL service inside the container, container will stop, exit and delete itself (not data) after that.
 
-6. Set up running JIRA via browser, you can use trial license to start working with JIRA.
+6. Set up running JIRA via browser, you can use trial license to start working with JIRA. Here you can import old database you saved in Step 4 (if you are migrating from previous JIRA installation). Use native JIRA import in JIRA administration - https://confluence.atlassian.com/jira062/migrating-jira-to-another-server-588581560.html#MigratingJIRAtoAnotherServer-3.6ImportyouroldJIRAdataintoyournewJIRA). 
 
-7. In running JIRA application import old database you saved in Step 4 (if you are migrating from previous JIRA installation). Use native JIRA import in JIRA administration - https://confluence.atlassian.com/jira062/migrating-jira-to-another-server-588581560.html#MigratingJIRAtoAnotherServer-3.6ImportyouroldJIRAdataintoyournewJIRA). 
-
-8. Set backup
+7. Set backup
 
 When you backup this on Docker host machine:
 
@@ -70,7 +64,7 @@ Then you are safe. You should set up database backups inside JIRA application. Y
 
 Anytime you can run `~/runjira.sh purge`. This will permanently erase all your data. You can use it to start from scratch (clean JIRA installation and clean database).
 
-## Data migration from old JIRA instance to a new one
+## Data migration from old JIRA instance to a new one (from Step 4)
 
 1. In old running JIRA instance perform a database backup, follow steps in JIRA Administration / System / System backup. JIRA typically stores database backups in JIRA home directory under export directory. For further import, copy your export file (zip) into /import directory located in JIRA home directory. You can check your folder settings in JIRA Administration / System / System info / File paths.
 
