@@ -25,7 +25,7 @@ To stop it run `docker stop jira`. To run it again use `docker start jira`. To c
 
 Enjoy!
 
-PostgreSQL database connection is using user jiradb and password jiradb. AS PostgreSQL is not listening to communication coming from outside of the container it is not such a big issue. You can change jiradb user password in PostgreSQL and then change dbconfig.xml in JIRA application directory to reflect this change. To get into the container to change this run `docker exec -it jira bash` and you will get bash inside the running container. Location of JIRA application directory is `/var/atlassian/jira-app` and user running database is postgres. 
+JIRA is set to use user jiradb and password jiradb for database connections. As PostgreSQL database is not listening to communication coming from outside of the container it is not such a big issue. You can change jiradb user password in PostgreSQL and then change dbconfig.xml in JIRA application directory to reflect this change. To get into the container to change this run `docker exec -it jira bash` and you will get bash inside the running container. Location of JIRA application directory is `/var/atlassian/jira-app` and user running database is postgres. 
 
 # Scenario B - advanced installation, migration, backup
 
