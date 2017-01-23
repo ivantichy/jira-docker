@@ -1,2 +1,2 @@
-docker build -t ivantichy/jira .
+docker build -t llowell/jira-yakkety .
 

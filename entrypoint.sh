@@ -12,7 +12,7 @@ if [ "$1" = "purge" ]; then
   service postgresql stop
   rm -rf /var/atlassian/jira-app/*
   rm -rf /var/atlassian/jira-home/*
-  rm -rf /var/lib/postgresql/9.4/main/*
+  rm -rf /var/lib/postgresql/9.5/main/*
 fi
 
 
@@ -29,15 +29,15 @@ if [ `ls | wc -l` -eq 0 ]; then
   echo "done" > file
 fi
 
-cd /var/lib/postgresql/9.4/main
+cd /var/lib/postgresql/9.5/main
 if [ `ls | wc -l` -eq 0 ]; then
-  cp -r /home/dbbackup/* /var/lib/postgresql/9.4/main/
-  chown -R postgres:postgres /var/lib/postgresql/9.4/main
-  chmod -R 0700 /var/lib/postgresql/9.4/main
+  cp -r /home/dbbackup/* /var/lib/postgresql/9.5/main/
+  chown -R postgres:postgres /var/lib/postgresql/9.5/main
+  chmod -R 0700 /var/lib/postgresql/9.5/main
 fi
 
-if [ \! -f  /var/lib/postgresql/9.4/main/file ]; then
-  cd /var/lib/postgresql/9.4/main
+if [ \! -f  /var/lib/postgresql/9.5/main/file ]; then
+  cd /var/lib/postgresql/9.5/main
   service postgresql start
   su - postgres << EOF
     cd /
@@ -52,8 +52,8 @@ cd /
 
 chown -R jira:jira /var/atlassian/jira-app
 chown -R jira:jira /var/atlassian/jira-home
-chown -R postgres:postgres /var/lib/postgresql/9.4/main
-chmod -R 0700 /var/lib/postgresql/9.4/main
+chown -R postgres:postgres /var/lib/postgresql/9.5/main
+chmod -R 0700 /var/lib/postgresql/9.5/main
 
 if [ "$1" != "install" ]; then
   service postgresql start
