@@ -1,3 +1,6 @@
+# Fork of https://github.com/ivantichy/jira-docker
+ivantichy did all the hard stuff. I just made some minor tweaks for my own purposes.
+
 # JIRA in Docker container
 
 Welcome to JIRA Docker image. What is this? This is simply something that have been missing over the whole Internet. Some fully automated one click JIRA installation. I tried to use Puppet, but official JIRA Puppet Forge stuff was obsolete.
