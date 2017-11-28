@@ -1,3 +1,6 @@
+# News
+Just moved to JIRA 7.6.0 and PostgreSQL 9.6!
+
 # JIRA in Docker container
 
 Welcome to JIRA Docker image. What is this? This is simply something that have been missing over the whole Internet. Some fully automated one click JIRA installation. I tried to use Puppet, but official JIRA Puppet Forge stuff was obsolete.
