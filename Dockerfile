@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 
 RUN useradd -u 1100 postgres && useradd -u 1099 dummyuser
 
