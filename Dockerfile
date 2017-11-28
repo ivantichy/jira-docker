@@ -5,7 +5,7 @@ RUN useradd -u 1100 postgres && useradd -u 1099 dummyuser
 RUN apt-get -y update && \
 apt-get -y install wget nano git postgresql && rm -rf /var/lib/apt/lists/*
 
-RUN  mkdir /home/dbbackup && cp -r /var/lib/postgresql/9.4/main/* /home/dbbackup/
+RUN  mkdir /home/dbbackup && cp -r /var/lib/postgresql/9.6/main/* /home/dbbackup/
 
 COPY check.gpr /check.gpr
 COPY ./installjira /installjira
@@ -19,7 +19,7 @@ RUN cd / && wget https://product-downloads.atlassian.com/software/jira/downloads
 && mkdir /home/jira-app-backup/ && cp -r /var/atlassian/jira-app/* /home/jira-app-backup/ \
 && mkdir /home/jira-home-backup/ && cp -r /var/atlassian/jira-home/* /home/jira-home-backup/
 
-VOLUME /var/lib/postgresql/9.4/main /var/atlassian/jira-app /var/atlassian/jira-home
+VOLUME /var/lib/postgresql/9.6/main /var/atlassian/jira-app /var/atlassian/jira-home
 
 EXPOSE 8080
 
