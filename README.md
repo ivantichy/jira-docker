@@ -31,7 +31,7 @@ When you run container using command like mentioned above (Scenario A) `docker r
 
 ## To use your own path for app data
 
-I personally start the container using this command: `docker run --cidfile ~/jiracid --rm -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.4/main -v /var/docker-data/jira-app:/var/atlassian/jira-app -v /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.6.0 "$@" &`. This causes (`-v` paramater) that Docker daemon uses paths I selected (`/var/docker-data/`). I usually backup these folders and I use them to migrate JIRA from one location to another. These folders survive container deletion which is important.
+I personally start the container using this command: `docker run --cidfile ~/jiracid --rm -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.6/main -v /var/docker-data/jira-app:/var/atlassian/jira-app -v /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.6.0 "$@" &`. This causes (`-v` paramater) that Docker daemon uses paths I selected (`/var/docker-data/`). I usually backup these folders and I use them to migrate JIRA from one location to another. These folders survive container deletion which is important.
 
 ## How to set it up
 
