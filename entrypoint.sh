@@ -58,7 +58,7 @@ chmod -R 0700 /var/lib/postgresql/9.6/main
 if [ "$1" != "install" ]; then
   service postgresql start
 
-  export JAVA_OPTS=-Djava.net.preferIPv4Stack=true
+  export JAVA_OPTS="-Djava.net.preferIPv4Stack=true $JAVA_OPTS"
   cd /var/atlassian/jira-app/bin
   ./start-jira.sh
 
