@@ -1,5 +1,5 @@
 # News
-Just moved to JIRA 7.10.0!
+Just moved to JIRA 7.12.3!
 
 # JIRA in Docker container
 
@@ -14,7 +14,7 @@ There are two ways you can use this image:
 
 **You can get clean JIRA installation this way:**
 
-`docker run -d --name jira -p 8080:8080  ivantichy/jira:7.10.0`
+`docker run -d --name jira -p 8080:8080 5432:5432  mentalm/jira:7.12.3`
 
 **The result is running JIRA listening on port 8080.**
 
