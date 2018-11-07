@@ -20,6 +20,7 @@ RUN cd / && wget https://product-downloads.atlassian.com/software/jira/downloads
 VOLUME /var/lib/postgresql/9.6/main /var/atlassian/jira-app /var/atlassian/jira-home
 
 EXPOSE 8080
+EXPOSE 5432
 
 COPY ./entrypoint.sh /entrypoint.sh
 COPY ./createdb.sql /createdb.sql
