@@ -1,5 +1,5 @@
 # News
-Just moved to JIRA 7.10.0!
+Just moved to JIRA 7.12.3!
 
 # JIRA in Docker container
 
@@ -14,13 +14,13 @@ There are two ways you can use this image:
 
 **You can get clean JIRA installation this way:**
 
-`docker run -d --name jira -p 8080:8080  ivantichy/jira:7.10.0`
+`docker run -d --name jira -p 8080:8080  mental667/jira:7.12.3`
 
 **The result is running JIRA listening on port 8080.**
 
 As a part of the installation there is PostgreSQL database. First time you run JIRA go to `http://yourmachine:8080` and set up JIRA. 
 
-To stop it run `docker stop jira`. To run it again use `docker start jira`. To clean all your settings (to uninstall JIRA) run `docker rm jira`. Then to run a new container use "run" command above e.g. `docker run -d --name jira -p 8080:8080  ivantichy/jira:7.10.0`.
+To stop it run `docker stop jira`. To run it again use `docker start jira`. To clean all your settings (to uninstall JIRA) run `docker rm jira`. Then to run a new container use "run" command above e.g. `docker run -d --name jira -p 8080:8080  mental667/jira:7.12.3`.
 
 Enjoy!
 
@@ -34,7 +34,7 @@ When you run container using command like mentioned above (Scenario A) `docker r
 
 ## To use your own path for app data
 
-I personally start the container using this command: `docker run --cidfile ~/jiracid --rm -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.6/main -v /var/docker-data/jira-app:/var/atlassian/jira-app -v /var/docker-data/jira-home:/var/atlassian/jira-home ivantichy/jira:7.10.0 "$@" &`. This causes (`-v` paramater) that Docker daemon uses paths I selected (`/var/docker-data/`). I usually backup these folders and I use them to migrate JIRA from one location to another. These folders survive container deletion which is important.
+I personally start the container using this command: `docker run --cidfile ~/jiracid --rm -p 8080:8080 -v /var/docker-data/postgres:/var/lib/postgresql/9.6/main -v /var/docker-data/jira-app:/var/atlassian/jira-app -v /var/docker-data/jira-home:/var/atlassian/jira-home mental667/jira:7.12.3 "$@" &`. This causes (`-v` paramater) that Docker daemon uses paths I selected (`/var/docker-data/`). I usually backup these folders and I use them to migrate JIRA from one location to another. These folders survive container deletion which is important.
 
 ## How to set it up
 
@@ -43,7 +43,7 @@ I personally start the container using this command: `docker run --cidfile ~/jir
  * `mkdir -p /var/docker-data/jira-app`
  * `mkdir -p /var/docker-data/jira-home`
 
-2. Download start script executing: `wget https://raw.githubusercontent.com/ivantichy/jira-docker/7.10.0/runjira.sh -O ~/runjira.sh && chmod +x ~/runjira.sh`
+2. Download start script executing: `wget https://raw.githubusercontent.com/mentalm/jira-docker/7.12.3/runjira.sh -O ~/runjira.sh && chmod +x ~/runjira.sh`
 
 3. Install JIRA (will not start JIRA)  executing `~/runjira.sh install`. Installation is running in background. Please check state using `docker ps` to see when it is finished (container exits). It takes something like a minute or so.
 
