@@ -80,3 +80,12 @@ Anytime you can run `~/runjira.sh purge`. This will permanently erase all your d
 ## Notes
 * Inside the container JAVA is running with -Djava.net.preferIPv4Stack=true directive to force Tomcat to listen on IPv4 (without that Tomcat is listening on IPv6 only).
 * I removed HTTPS support from JIRA container as this should be managed by separate container doing proxy/load balancing.
+
+##License
+Copyright (c) 2018, Ivan Tichý. All rights reserved.
+
+You may not use the identified files except in compliance with the GNU General Public License v3.0 (the "License.")
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the License for the specific language governing permissions and limitations under the License.
