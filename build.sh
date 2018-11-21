@@ -1,2 +1,2 @@
-docker build -t mental667/jira .
+docker build -t ivantichy/jira .
 
